@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="900" viewBox="0 0 1200 900">
+  <style>
+    .box { fill:#f7f7f7; stroke:#333; stroke-width:1px; }
+    .title { font: bold 14px sans-serif; }
+    .attr { font: 12px sans-serif; }
+    .pk { font-weight:700; }
+    .fk { font-style:italic; }
+    .link { stroke:#555; stroke-width:1.2px; }
+  </style>
+
+  <!-- PASSENGER -->
+  <g transform="translate(40,40)">
+    <rect class="box" width="260" height="110" rx="6"/>
+    <text x="10" y="22" class="title">PASSENGER</text>
+    <text x="10" y="44" class="attr pk">Passenger_ID (PK)</text>
+    <text x="10" y="62" class="attr">Passenger_Name</text>
+    <text x="10" y="80" class="attr">Phone_Number</text>
+    <text x="10" y="98" class="attr">Email_Address</text>
+  </g>
+
+  <!-- BOOKING -->
+  <g transform="translate(360,40)">
+    <rect class="box" width="300" height="140" rx="6"/>
+    <text x="10" y="22" class="title">BOOKING</text>
+    <text x="10" y="44" class="attr pk">Booking_ID (PK)</text>
+    <text x="10" y="62" class="attr fk">Passenger_ID (FK)</text>
+    <text x="10" y="80" class="attr fk">Trip_ID (FK)</text>
+    <text x="10" y="98" class="attr">Booking_Date</text>
+    <text x="10" y="116" class="attr">Booking_Class, Booking_Status</text>
+  </g>
+
+  <!-- TICKET -->
+  <g transform="translate(720,40)">
+    <rect class="box" width="240" height="90" rx="6"/>
+    <text x="10" y="22" class="title">TICKET</text>
+    <text x="10" y="44" class="attr pk">Ticket_ID (PK)</text>
+    <text x="10" y="62" class="attr fk">Booking_ID (FK, unique)</text>
+    <text x="10" y="80" class="attr">Fare_Amount, Issue_Date</text>
+  </g>
+
+  <!-- PAYMENT -->
+  <g transform="translate(1000,40)">
+    <rect class="box" width="180" height="100" rx="6"/>
+    <text x="10" y="22" class="title">PAYMENT</text>
+    <text x="10" y="44" class="attr pk">Payment_ID (PK)</text>
+    <text x="10" y="62" class="attr fk">Ticket_ID (FK, unique)</text>
+    <text x="10" y="80" class="attr">Amount, Date, Method</text>
+  </g>
+
+  <!-- ROUTE -->
+  <g transform="translate(40,220)">
+    <rect class="box" width="300" height="100" rx="6"/>
+    <text x="10" y="22" class="title">ROUTE</text>
+    <text x="10" y="44" class="attr pk">Route_ID (PK)</text>
+    <text x="10" y="62" class="attr">Origin, Destination</text>
+    <text x="10" y="80" class="attr">Distance_KM, Estimated_Duration</text>
+  </g>
+
+  <!-- BUS -->
+  <g transform="translate(420,220)">
+    <rect class="box" width="280" height="110" rx="6"/>
+    <text x="10" y="22" class="title">BUS</text>
+    <text x="10" y="44" class="attr pk">Bus_ID (PK)</text>
+    <text x="10" y="62" class="attr">Registration_No, Capacity</text>
+    <text x="10" y="80" class="attr">Type, Availability_Status</text>
+  </g>
+
+  <!-- TRIP -->
+  <g transform="translate(780,220)">
+    <rect class="box" width="360" height="120" rx="6"/>
+    <text x="10" y="22" class="title">TRIP</text>
+    <text x="10" y="44" class="attr pk">Trip_ID (PK)</text>
+    <text x="10" y="62" class="attr fk">Route_ID (FK)</text>
+    <text x="10" y="80" class="attr fk">Bus_ID (FK)</text>
+    <text x="10" y="98" class="attr">Trip_Date, Departure_Time, Arrival_Time</text>
+  </g>
+
+  <!-- STAFF -->
+  <g transform="translate(40,420)">
+    <rect class="box" width="320" height="110" rx="6"/>
+    <text x="10" y="22" class="title">STAFF</text>
+    <text x="10" y="44" class="attr pk">Staff_ID (PK)</text>
+    <text x="10" y="62" class="attr">Staff_Name</text>
+    <text x="10" y="80" class="attr">Role, Phone_Number, Hire_Date</text>
+  </g>
+
+  <!-- BUS_STAFF_ASSIGNMENT -->
+  <g transform="translate(400,420)">
+    <rect class="box" width="340" height="90" rx="6"/>
+    <text x="10" y="22" class="title">BUS_STAFF_ASSIGNMENT</text>
+    <text x="10" y="44" class="attr pk">Assignment_ID (PK)</text>
+    <text x="10" y="62" class="attr fk">Bus_ID (FK), Staff_ID (FK)</text>
+    <text x="10" y="80" class="attr">Assignment_Date</text>
+  </g>
+
+  <!-- Links (simple lines with arrowheads) -->
+  <defs>
+    <marker id="arrow" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L6,3 L0,6 L2,3 z" fill="#555" />
+    </marker>
+  </defs>
+
+  <!-- PASSENGER -> BOOKING -->
+  <line class="link" x1="300" y1="95" x2="360" y2="95" marker-end="url(#arrow)" />
+  <!-- BOOKING -> TICKET -->
+  <line class="link" x1="660" y1="95" x2="720" y2="95" marker-end="url(#arrow)" />
+  <!-- TICKET -> PAYMENT -->
+  <line class="link" x1="960" y1="95" x2="1000" y2="95" marker-end="url(#arrow)" />
+
+  <!-- ROUTE -> TRIP -->
+  <line class="link" x1="340" y1="270" x2="780" y2="270" marker-end="url(#arrow)" />
+  <!-- BUS -> TRIP -->
+  <line class="link" x1="700" y1="270" x2="780" y2="270" marker-end="url(#arrow)" />
+  <!-- TRIP -> BOOKING -->
+  <line class="link" x1="780" y1="290" x2="480" y2="140" marker-end="url(#arrow)" />
+
+  <!-- BUS <-> BUS_STAFF_ASSIGNMENT -->
+  <line class="link" x1="560" y1="270" x2="560" y2="420" marker-end="url(#arrow)" />
+  <!-- STAFF <-> BUS_STAFF_ASSIGNMENT -->
+  <line class="link" x1="200" y1="420" x2="400" y2="420" marker-end="url(#arrow)" />
+
+  <!-- Legend -->
+  <g transform="translate(40,560)">
+    <text class="attr">Legend: (PK)=Primary Key, (FK)=Foreign Key</text>
+  </g>
+
+</svg>
